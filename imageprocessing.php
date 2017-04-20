@@ -23,7 +23,6 @@
         unlink($resultImage);
     }
 
-    echo "[".json_encode($images[1])."]";
 
 
 
@@ -41,9 +40,16 @@
         return $output_file; 
     }
 
-    for($i = 0; $i < 5; $i++){
+    for($i = 0; $i < count($images); $i++){
         base64_to_jpeg($images[$i], ($i + 1).".png");
     }
 
+    ///
+    /// Call python median blending algorithm
+    ///
+    $scriptName = '/var/www/html/blend.py';
+    $options = $method;
+    exec ("/usr/bin/python3 {$scriptName} {$options} > /var/www/html/blend_log.txt 2>&1");
 
+    echo "[".json_encode($images[1])."]";
 ?>
