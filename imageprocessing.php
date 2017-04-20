@@ -10,8 +10,26 @@
     ///
     /// Delete the old images
     ///
+    for($i = 0; $i < 20; $i++){
+        $imgname = $i.".png";
 
-    echo "[".json_encode($images[0])."]";
+        if(file_exists($imgname)){
+            unlink($imgname);
+        }
+    }
+
+    $resultImage = "results.jpg";
+    if(file_exists($resultImage)){
+        unlink($resultImage);
+    }
+
+    echo "[".json_encode($images[1])."]";
+
+
+
+    ///
+    /// Convert Base64 images to filesystem images
+    ///
 
 
 
