@@ -7,6 +7,8 @@
     $imagesHTML = html_entity_decode($imagesJSON);
     $images = json_decode($imagesHTML);
 
+
+
     ///
     /// Delete the old images
     ///
@@ -22,7 +24,6 @@
     if(file_exists($resultImage)){
         unlink($resultImage);
     }
-
 
 
 
@@ -44,6 +45,8 @@
         base64_to_jpeg($images[$i], ($i + 1).".png");
     }
 
+
+
     ///
     /// Call python median blending algorithm
     ///
@@ -51,5 +54,15 @@
     $options = $method;
     exec ("/usr/bin/python3 {$scriptName} {$options} > /var/www/html/blend_log.txt 2>&1");
 
-    echo "[".json_encode($images[1])."]";
+
+
+    ///
+    /// Read the result image into base64
+    ///
+    $path = '/var/www/html/results.jpg';
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+    echo "[".json_encode($base64)."]";
 ?>
