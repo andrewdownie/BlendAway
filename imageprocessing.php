@@ -51,7 +51,7 @@
     /// Call python median blending algorithm
     ///
     $scriptName = '/var/www/html/blend.py';
-    $options = $method;
+    $options = $method." ".count($images);
     exec ("/usr/bin/python3 {$scriptName} {$options} > /var/www/html/blend_log.txt 2>&1");
 
 
@@ -64,5 +64,9 @@
     $data = file_get_contents($path);
     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
+
+    ///
+    /// Return the resulting image
+    ///
     echo "[".json_encode($base64)."]";
 ?>

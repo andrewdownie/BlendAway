@@ -25,14 +25,19 @@ $(document).ready(function(){
 });
 
 function ImageListLength(){
+    $("#processingMethodsGroup").hide()
+
     if(imageList.length < 5){
-        $("#photoInsertionText").text("Add more photos, exactly 5 photos are required.")
+        $("#photoInsertionText").html("Add more photos, exactly 5 photos are required.")
+        $("#photoOutput").html("")
     }
     else if(imageList.length > 5){
-        $("#photoInsertionText").text("Too many photos, clear the photos and start over")
+        $("#photoInsertionText").html("Too many photos, clear the photos and start over.")
+        $("#photoOutput").html("")
     }
     else{
         $("#photoInsertionText").text("")
+        $("#processingMethodsGroup").show()
     }
 
 }
@@ -68,14 +73,23 @@ function renderImage(file) {
 
 
 function ProcessImages(algo, imageList){
-    if(imageList.length != 5){
+    if(imageList.length < 5){
+        alert("Currently EXACTLY 5 photo are required as input. You have " + imageList.length + " input photos. Please add more photos until you have 5.")
+        return
+    }
+    else if(imageList.length > 5){
         alert("Currently EXACTLY 5 photo are required as input. You have " + imageList.length + " input photos. Please clear the photos and start over.")
         return
     }
 
+    $("#outputPhotoHeader").show()
     $("#Loading").show()
 
     //$("#photoOutput").html(algo)
+
+    if(algo == null || algo == ""){
+        console.log("ERROR: algo was empty")
+    }
 
     $.ajax({
         type: "POST",
@@ -91,6 +105,7 @@ function ProcessImages(algo, imageList){
     
     }).done(function(response) {
         $("#Loading").hide()
+        console.log(response)
         
        images = JSON.parse(response)
 

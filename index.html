@@ -68,17 +68,21 @@
         <div class="row">
 
             <div class="col-lg-12">
+                <br/>
                 <h1><i class="fa fa-file-image-o" aria-hidden="true"></i> Input Photos</h1>
                 <br/>
-                <p>Photos must all be the same dimensions</p>
             </div>
 
-            <button class="btn btn-primary col-xs-12" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0;" id="ClearPhotos">Clear Photos</button>
-            <input class="btn btn-default col-xs-12" style="border-top-left-radius: 0; border-top-right-radius: 0;" id="imageSelector" type="file" accept=".png, .gif, .jpg, .jpeg" multiple>
+
+            <button class="btn btn-primary col-sm-12" style="width:100%; border-bottom-left-radius: 0; border-bottom-right-radius: 0;" id="ClearPhotos">Clear Photos</button>
+            <input class="btn btn-default col-sm-12" style="width:100%; border-top-left-radius: 0; border-top-right-radius: 0;" id="imageSelector" type="file" accept=".png, .gif, .jpg, .jpeg" multiple>
 
             <div class="col-lg-12">
                 <br/>
-                <div class="row" style="color:red;" id="photoInsertionText"></div>
+                <div class="row">
+                    <p class="col-sm-6"style="color:red;" id="photoInsertionText"></p>
+                    <p class="col-sm-6" style="text-align: right;">Photos must all be the same dimensions.</p>
+                </div>
                 <br/>
             </div>
 
@@ -92,13 +96,13 @@
         <br/>
         <br/>
 
-        <div class="row">
+        <div class="row" id="processingMethodsGroup">
             <div class="col-lg-12">
                 <h1><i class="fa fa-cogs" aria-hidden="true"></i> Processing methods</h1>
                 <br/>
-                <button class="btn btn-primary" id="Median">Apply Median Blending</button>
-                <button class="btn btn-default" id="Mean">Apply Mean Blending</button>
-                <button class="btn btn-default" id="Mode">Apply Mode Blending</button>
+                <button class="btn btn-primary" style="width:175px;" id="Median">Apply Median Blending</button>
+                <button class="btn btn-default" style="width:175px;" id="Mean">Apply Mean Blending</button>
+                <button class="btn btn-default" style="width:175px;" id="Mode">Apply Mode Blending</button>
                 <br/>
                 <br/>
                 <br/>
@@ -106,7 +110,7 @@
                 
             </div>
             <div class="col-lg-12">
-                <h1><i class="fa fa-download" aria-hidden="true"></i> Output Photo</h1>
+                <h1 id="outputPhotoHeader" style="display:none;"><i class="fa fa-download" aria-hidden="true"></i> Output Photo</h1>
                 <div id="Loading" style="display:none"><br/><i class="fa fa-circle-o-notch fa-spin fa-fw"></i>Uploading/Processing...</div>
                 <br/>
                 <div class="row" id="photoOutput">
